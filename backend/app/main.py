@@ -1,8 +1,10 @@
 from contextlib import asynccontextmanager
+from datetime import datetime, timezone
 from pathlib import Path
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI
 from app.core.config import settings
 from app.core.logger import logger
+from app.api.health import router as health_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -13,6 +15,9 @@ async def lifespan(app: FastAPI):
     logger.info(f"App Version: {settings.APP_VERSION}")
     logger.info(f"App Environment: {settings.APP_ENV}")
     logger.info(f"Debug Mode: {settings.DEBUG}")
+
+    # Record the application startup time
+    app.state.startup_time = datetime.now(timezone.utc)
 
     # Validate critical environment settings
     if not settings.GROQ_API_KEY:
@@ -43,21 +48,6 @@ app = FastAPI(
     docs_url="/docs",
     redoc_url="/redoc"
 )
-
-# Define temporary health check router (will be refactored to health api in Module 4)
-health_router = APIRouter()
-
-@health_router.get("/health", tags=["Health"])
-async def health_check():
-    """
-    Service health check endpoint.
-    """
-    return {
-        "status": "healthy",
-        "app_name": settings.APP_NAME,
-        "version": settings.APP_VERSION,
-        "environment": settings.APP_ENV
-    }
 
 # Register routers
 app.include_router(health_router)
