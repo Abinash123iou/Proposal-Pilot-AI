@@ -26,6 +26,9 @@ class Settings(BaseModel):
     GROQ_MODEL: str = Field(default_factory=lambda: os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile"))
     
     LOG_LEVEL: str = Field(default_factory=lambda: os.getenv("LOG_LEVEL", "INFO"))
+    LOG_FILE: str = Field(default_factory=lambda: os.getenv("LOG_FILE", str(BASE_DIR / "logs" / "proposal_pilot.log")))
+    LOG_ROTATION: str = Field(default_factory=lambda: os.getenv("LOG_ROTATION", "10 MB"))
+    LOG_RETENTION: str = Field(default_factory=lambda: os.getenv("LOG_RETENTION", "10 days"))
     
     OUTPUT_DIR: str = Field(default_factory=lambda: os.getenv("OUTPUT_DIR", "generated_docs"))
     
