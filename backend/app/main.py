@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from app.core.config import settings
 from app.core.logger import logger
 from app.api.health import router as health_router
+from app.api.proposal import router as proposal_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -51,3 +52,4 @@ app = FastAPI(
 
 # Register routers
 app.include_router(health_router)
+app.include_router(proposal_router)

@@ -55,6 +55,7 @@ class ProposalResponse(BaseResponse):
     )
     execution_time: str = Field(..., description="Time duration taken to run agents and export proposal", json_schema_extra={"example": "8.4 seconds"})
     status: str = Field(default="completed", description="Execution status", json_schema_extra={"example": "completed"})
+    quality_score: Optional[int] = Field(default=None, description="The QA quality score evaluated for this proposal", json_schema_extra={"example": 95})
 
 class ErrorResponse(BaseResponse):
     """
