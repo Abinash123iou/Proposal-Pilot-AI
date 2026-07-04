@@ -15,3 +15,8 @@ class AgentState(TypedDict):
     status: str
     metadata: Dict[str, Any]
     errors: List[str]
+    # Module 11 additions
+    quality_score: Optional[int]
+    review_status: Optional[str]
+    regenerated_sections: Optional[List[str]]
+

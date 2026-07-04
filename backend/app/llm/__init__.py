@@ -12,13 +12,17 @@ from app.llm.prompts import (
     PLANNER_SYSTEM_PROMPT,
     EXECUTOR_SYSTEM_PROMPT,
     REFLECTION_SYSTEM_PROMPT,
+    REFLECTION_QA_SYSTEM_PROMPT,
+    REGENERATION_SYSTEM_PROMPT,
     TONE,
     WRITING_GUIDELINES
 )
 from app.llm.prompt_builder import (
     build_planner_prompt,
     build_executor_prompt,
-    build_reflection_prompt
+    build_reflection_prompt,
+    build_reflection_qa_prompt,
+    build_regeneration_prompt
 )
 
 # Shared singleton instance of the LLM Service
